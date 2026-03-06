@@ -1,0 +1,13 @@
+server:
+  address: 0.0.0.0
+
+md:
+  # Linux 固定目录
+  root-path: data/study-notes
+  # 1MB，防止大文件攻击
+  max-file-size: 1048576
+  # 忽略的文件名
+  ignorePaths:
+    - .git
+    - .idea
+    - .gitignore

@@ -1,18 +1,27 @@
-# 使用轻量 JRE 镜像
-FROM eclipse-temurin:17-jre
+# -------- 基础运行环境 --------
+FROM eclipse-temurin:17-jre-jammy
 
-# 设置工作目录
+# 创建非 root 用户（安全）
+RUN useradd -r -u 1001 appuser
+
 WORKDIR /app
 
-# 拷贝 jar
+# 拷贝 jar（明确文件名，避免歧义）
 COPY target/*.jar app.jar
 
-# 暴露端口（Spring Boot 默认 8080）
+# 修改权限
+RUN chown -R appuser:appuser /app
+
+# 切换用户
+USER appuser
+
+# 暴露端口
 EXPOSE 8080
 
-# 启动命令
-ENTRYPOINT ["java",
-  "-Xms256m",
-  "-Xmx512m",
-  "-XX:+UseG1GC",
-  "-jar","/app/app.jar"]
+# JVM 参数（容器友好）
+ENTRYPOINT ["java", \
+  "-XX:+UseContainerSupport", \
+  "-XX:MaxRAMPercentage=75.0", \
+  "-XX:+ExitOnOutOfMemoryError", \
+  "-Dfile.encoding=UTF-8", \
+  "-jar", "/app/app.jar"]

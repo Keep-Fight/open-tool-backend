@@ -1,1 +1,11 @@
-spring.application.name=open-tool-backend
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: open-tool-backend
+  profiles:
+    active: dev
+

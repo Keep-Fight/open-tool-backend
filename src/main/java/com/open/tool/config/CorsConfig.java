@@ -1,4 +1,4 @@
-package com.simple.boot.config;
+package com.open.tool.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

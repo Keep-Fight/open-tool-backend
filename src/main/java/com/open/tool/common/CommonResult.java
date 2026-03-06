@@ -1,8 +1,6 @@
-package com.simple.cloud.common.core.response;
+package com.open.tool.common;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.simple.cloud.common.core.enums.ResultCodeEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -34,33 +32,15 @@ public class CommonResult<T> {
     }
 
     public static <E> CommonResult<E> success(String message, E data) {
-        return new CommonResult<>(ResultCodeEnum.SUCCESS.getCode(), message, data);
+        return new CommonResult<>(200, message, data);
     }
 
     public static <E> CommonResult<E> success(E data) {
-        return success(ResultCodeEnum.SUCCESS.getMsg(), data);
-    }
-
-    public static <E> CommonResult<E> success() {
-        return success(null);
+        return success("success", data);
     }
 
     public static <E> CommonResult<E> error(Integer code, String message) {
         return new CommonResult<>(code, message, null);
-    }
-
-    public static <E> CommonResult<E> error(String message) {
-        return error(ResultCodeEnum.FAILED.getCode(), message);
-    }
-
-    @JsonIgnore
-    public  boolean isSuccess() {
-        return ResultCodeEnum.SUCCESS.getCode().equals(code);
-    }
-
-    @JsonIgnore
-    public  boolean isError() {
-        return !isSuccess();
     }
 
 }

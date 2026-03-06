@@ -1,0 +1,10 @@
+md:
+  # Linux 固定目录
+  root-path: C:/Users/Administrator/Desktop/study-notes
+  # 1MB，防止大文件攻击
+  max-file-size: 1048576
+  # 忽略的文件名
+  ignorePaths:
+    - .git
+    - .idea
+    - .gitignore
