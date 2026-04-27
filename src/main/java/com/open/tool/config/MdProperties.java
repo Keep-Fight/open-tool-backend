@@ -18,6 +18,8 @@ public class MdProperties {
     private Path rootPath;
     private long maxFileSize;
     private List<String> ignorePaths;
+    private List<String> directories;
+    private String activeFileName;
 
     public Path getRootPath() {
         return rootPath.normalize().toAbsolutePath();

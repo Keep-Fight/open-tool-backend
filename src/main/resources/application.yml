@@ -7,5 +7,5 @@ spring:
   application:
     name: open-tool-backend
   profiles:
-    active: dev
+    active: local
 

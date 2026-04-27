@@ -1,6 +1,21 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      # 单个文件最大 100MB
+      max-file-size: 100MB
+      # 整个请求最大 100MB
+      max-request-size: 100MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/open_tool?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+
 md:
   # Linux 固定目录
-  root-path: C:/Users/Administrator/Desktop/study-notes
+  root-path: C:/StudyFiles/study-notes
   # 1MB，防止大文件攻击
   max-file-size: 1048576
   # 忽略的文件名
@@ -8,3 +23,30 @@ md:
     - .git
     - .idea
     - .gitignore
+  # 最顶层目录列表
+  directories:
+    - '笔记简介'
+    - '编程语言'
+    - '数据存储'
+    - '框架生态'
+    - 'AI 应用'
+    - '开发工具'
+    - '运维部署'
+    - '求职面试'
+    - '其他'
+
+minio:
+  endpoint: https://minio.xxxxx.com
+  accessKey: minio
+  secretKey: minio123456
+  bucket-name: bucket-name
+
+
+open-tool:
+  # 请求密钥，限制请求来源
+  secret-key: '123456'
+
+
+
+
+

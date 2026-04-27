@@ -6,7 +6,7 @@ RUN useradd -r -u 1001 appuser
 
 WORKDIR /app
 
-# 拷贝 jar（明确文件名，避免歧义）
+# 拷贝 jar
 COPY target/*.jar app.jar
 
 # 修改权限
@@ -18,7 +18,7 @@ USER appuser
 # 暴露端口
 EXPOSE 8080
 
-# JVM 参数（容器友好）
+# JVM 参数
 ENTRYPOINT ["java", \
   "-XX:+UseContainerSupport", \
   "-XX:MaxRAMPercentage=75.0", \
