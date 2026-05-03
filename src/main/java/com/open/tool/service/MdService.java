@@ -36,9 +36,22 @@ public class MdService {
                         MdIcon::getIcon));
         // 递归遍历目录，构建树状结构
         List<TreeNode> nodes = walk(props.getRootPath(), "", iconMap);
-        // 按 directories 的顺序进行排序，不在 directories 中的目录最后面
+        // 只保留 directories 中配置的顶层目录
+        nodes = filterTopLevelNodes(nodes);
+        // 按 directories 的顺序进行排序
         nodes = sortTopLevelNodes(nodes);
         return nodes;
+    }
+
+    private List<TreeNode> filterTopLevelNodes(List<TreeNode> topLevelNodes) {
+        List<String> dirs = props.getDirectories();
+        if (dirs == null || dirs.isEmpty()) {
+            return topLevelNodes;
+        }
+        Set<String> dirSet = new HashSet<>(dirs);
+        return topLevelNodes.stream()
+                .filter(node -> dirSet.contains(node.getTitle()))
+                .collect(Collectors.toList());
     }
 
     private List<TreeNode> walk(Path dir, String relative, Map<String, String> iconMap) {
@@ -111,7 +124,7 @@ public class MdService {
         }
     }
 
-    // 按 directories 的顺序进行排序，不在 directories 中的目录最后面
+    // 按 directories 的顺序进行排序
     public List<TreeNode> sortTopLevelNodes(List<TreeNode> topLevelNodes) {
         // 1. 先转换为可变列表（关键修复：避免不可变列表排序报错）
         List<TreeNode> mutableNodes = new ArrayList<>(topLevelNodes);
